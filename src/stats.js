@@ -1,3 +1,4 @@
+var winston = require( 'winston' );
 
 function Stats(){
   this.data = { start: new Date().getTime() };
@@ -28,7 +29,7 @@ Stats.prototype.updateStats = function(){
 };
 
 Stats.prototype.flush = function(){
-  console.log( JSON.stringify( this.data, null, 2 ) );
+  winston.info( 'flush', JSON.stringify( this.data, null, 2 ) );
 };
 
 Stats.prototype.runWatchers = function(){
