@@ -1,7 +1,8 @@
 var winston = require( 'winston' );
+var peliasConfig = require( 'pelias-config' );
 
 function Stats(){
-  this.data = { start: new Date().getTime() };
+  this.data = {};
   this.active = false;
   this.watching = {};
 }
@@ -12,7 +13,8 @@ Stats.prototype.watch = function( key, func ){
 
 Stats.prototype.start = function(){
   this.end();
-  this.interval = setInterval( this.updateStats.bind(this), 500 );
+  var interval = peliasConfig.generate().dbclient.statFrequency;
+  this.interval = setInterval( this.updateStats.bind(this), interval );
 };
 
 Stats.prototype.updateStats = function(){
@@ -29,7 +31,7 @@ Stats.prototype.updateStats = function(){
 };
 
 Stats.prototype.flush = function(){
-  winston.info( 'flush', JSON.stringify( this.data, null, 2 ) );
+  winston.info( JSON.stringify( this.data ) );
 };
 
 Stats.prototype.runWatchers = function(){
@@ -39,10 +41,9 @@ Stats.prototype.runWatchers = function(){
 };
 
 Stats.prototype.end = function(){
-  if( this.active ){  
+  if( this.active ){
     this.updateStats();
     clearInterval( this.interval );
-    this.data.end = new Date().getTime();
     this.flush();
   }
 };
