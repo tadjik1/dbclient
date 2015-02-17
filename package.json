@@ -1,6 +1,6 @@
 {
   "name": "pelias-dbclient",
-  "version": "0.0.6",
+  "version": "0.0.9",
   "description": "Database client for Pelias import pipelines",
   "main": "index.js",
   "scripts": {
@@ -33,6 +33,6 @@
     "osm-pbf-parser": "^2.1.2",
     "pelias-config": "0.0.7",
     "through2": "^0.6.1",
-    "winston": "0.9.0"
+    "pelias-logger": "^0.x.x"
   }
 }
