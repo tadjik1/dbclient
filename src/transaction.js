@@ -1,4 +1,4 @@
-var winston = require( 'winston' );
+var winston = require( 'pelias-logger' ).get( 'dbclient' );
 
 var max_retries = 5;
 var o = 0;
@@ -28,7 +28,7 @@ function wrapper( client ){
     // invalid bulk body length
     // @optimistic this should never happen
     if( !payload.length ){
-      var errMsg = 'invalid bulk payload length. Payload received:' +
+      var errMsg = 'invalid bulk payload length. Payload received: ' +
         JSON.stringify( payload, null, 2 );
       return cb( errMsg );
     }
@@ -64,7 +64,7 @@ function wrapper( client ){
           // console.log( 'set task status', task.status, JSON.stringify( action, null, 2 ) );
 
           if( task.status > 201 ){
-            winston.warn( '[' + action.status + ']', action.error );
+            winston.error( '[' + action.status + ']', action.error );
           }
           // else {
           //   delete task.cmd; // reclaim memory

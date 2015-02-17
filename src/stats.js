@@ -1,4 +1,4 @@
-var winston = require( 'winston' );
+var winston = require( 'pelias-logger' ).get( 'dbclient' );
 var peliasConfig = require( 'pelias-config' );
 
 function Stats(){
@@ -31,7 +31,7 @@ Stats.prototype.updateStats = function(){
 };
 
 Stats.prototype.flush = function(){
-  winston.info( JSON.stringify( this.data ) );
+  winston.verbose( this.data );
 };
 
 Stats.prototype.runWatchers = function(){

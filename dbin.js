@@ -1,4 +1,4 @@
-var winston = require( 'winston' );
+var winston = require( 'pelias-logger' ).get( 'dbclient' );
 var sink = require('./src/sink')();
 var byline = require('byline');
 var through = require('through2');

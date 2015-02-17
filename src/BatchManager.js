@@ -1,7 +1,7 @@
 
 var Batch = require('./Batch'),
     transaction = require('./transaction'),
-    winston = require( 'winston' );
+    winston = require( 'pelias-logger' ).get( 'dbclient' );
     // HealthCheck = require('./HealthCheck'),
     // hc = new HealthCheck( client );
 

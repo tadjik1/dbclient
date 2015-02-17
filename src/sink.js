@@ -1,14 +1,9 @@
 
 var through = require('through2'),
     BatchManager = require('./BatchManager'),
-    winston = require('winston');
+    winston = require( 'pelias-logger' ).get( 'dbclient' );
 
 function streamFactory( opts ){
-  winston.remove( winston.transports.Console );
-  winston.add( winston.transports.Console, {
-    timestamp: true, colorize: true
-  });
-
   opts = opts || {};
   if( !opts.client ){ opts.client = require('./client')(); }
 
